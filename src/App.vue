@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div class="input"><input_item @submit_item="handleSubmit"></input_item></div>
-    <div class="table"><table_item :table_data='data' @delete="deleteRow"></table_item></div>
+    <div class="table"><table_item @edit="editThing" :table_data='data' @delete="deleteRow"></table_item></div>
   </div>
 </template>
 
 <script>
 import input_item from './components/input.vue'
-import table_item from './components/table.vue'
+import table_item from './components/EditableTable.vue'
 
 export default {
   components:{
@@ -49,6 +49,14 @@ export default {
       let json_data = JSON.stringify(Data)
       localStorage.setItem("datas",json_data)
     },
+    editThing(thing){
+      this.data = thing
+      let Data = {
+        strData: this.data
+      }
+      let json_data = JSON.stringify(Data)
+      localStorage.setItem("datas",json_data)
+    }
   },
   mounted(){
     this.getItems()
@@ -66,10 +74,11 @@ export default {
 }
 
 .input {
-  width: 80%
+  width: 80%;
 }
 
 .table {
+  margin-top: 20px;
   width: 80%
 }
 </style>

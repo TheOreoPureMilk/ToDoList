@@ -1,36 +1,37 @@
 <template>
   <div class="card">
-    
+  <div class="Aitem" v-for="(item, index) in table_data"  @keyup="edit" :key="index">
     <div class="sequence">
-      <span v-for="(index) in table_data" :key="index">
-        <input type="text" value="index+1">
+      <span>
+        {{ index+1 }}
       </span>
     </div>
     
     <div class="names">
-      <span v-for="(index, item)in table_data" :key="index">
+      <span>
         <input v-model="item.items" type="text" value="item.items">
       </span>
     </div>
     
     <div class="ddl">
-      <span v-for="(index, item)in table_data" :key="index">
+      <span>
         <input v-model="item.ddl" type="text" value="item.ddl">
       </span>
     </div>
     
     <div class="description">
-      <span v-for="(index, item)in table_data" :key="index">
-        <input v-model="item.description" type="text" value="item.description">
+      <span>
+        <input  v-model="item.description" type="text" value="item.description">
       </span>
     </div>
 
     <div class="delete">
-      <span v-for="(index) in table_data" :key="index">
-        <el-button @click="deleteRow(index)"></el-button>
+      <span>
+        <el-button size="small" @click="deleteRow(index)">删除</el-button>
       </span>
     </div>
 
+  </div>
   </div>
 </template>
 
@@ -41,18 +42,30 @@ export default {
   methods:{
     deleteRow(index){
       this.$emit("delete",index)
+    },
+    edit(){
+      this.$emit("edit",this.table_data)
     }
-  }
+  },
 }
 </script>
 
 <style>
   .card {
     display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+
+    width: 80%;
+  }
+
+  .Aitem {
+    display: flex;
     justify-content: space-between;
     align-content: center;
 
-    width: 80%;
+    height: 25px;
   }
 
   .sequence, .names, .ddl, .description {
@@ -60,10 +73,21 @@ export default {
     justify-content: center;
     align-content: center;
     
-    width: 20%
+    width: 20%;
+    height: 100%;
+  }
+
+  span {
+    display: flex;
+    align-content: center;
+
+    width: 100%
   }
   
   input {
+    width: 100%;
+    height: 90%;
+
     border:none;
   }
 </style>
