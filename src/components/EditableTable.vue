@@ -1,36 +1,62 @@
 <template>
   <div class="card">
+  <div class="Aitem">
+    <div class="sequence">
+      <span class="item_span">
+        序号
+      </span>
+    </div>
+    
+    <div class="names">
+      <span class="item_span">
+        名称
+      </span>
+    </div>
+    
+    <div class="ddl">
+      <span class="item_span">
+        截止日期
+      </span>
+    </div>
+    
+    <div class="description">
+      <span class="item_span">
+        描述
+      </span>
+    </div>
+  </div>
   <div class="Aitem" v-for="(item, index) in table_data"  @keyup="edit" :key="index">
     <div class="sequence">
-      <span>
+      <span class="item_span">
         {{ index+1 }}
       </span>
     </div>
     
     <div class="names">
-      <span>
+      <span class="item_span">
         <input v-model="item.items" type="text" value="item.items">
       </span>
     </div>
     
     <div class="ddl">
-      <span>
+      <span class="item_span">
         <input v-model="item.ddl" type="text" value="item.ddl">
       </span>
     </div>
     
     <div class="description">
-      <span>
+      <span class="item_span">
         <input  v-model="item.description" type="text" value="item.description">
       </span>
     </div>
-
-    <div class="delete">
+    <div class="function">
       <span>
-        <el-button size="small" @click="deleteRow(index)">删除</el-button>
+        <el-button size="mini" @click="deleteRow(index)">删除</el-button>
+      </span>
+      <span>
+        <el-button size="mini" @click="done(index)">switch</el-button>
       </span>
     </div>
-
   </div>
   </div>
 </template>
@@ -45,6 +71,9 @@ export default {
     },
     edit(){
       this.$emit("edit",this.table_data)
+    },
+    done(index){
+      this.$emit('thingDone',index)
     }
   },
 }
@@ -60,11 +89,19 @@ export default {
     width: 80%;
   }
 
+  .head {
+    width: 100%
+  }
+  
+  .head_span {
+  }
+
   .Aitem {
     display: flex;
     justify-content: space-between;
     align-content: center;
 
+    width: 100%;
     height: 25px;
   }
 
@@ -73,13 +110,19 @@ export default {
     justify-content: center;
     align-content: center;
     
-    width: 20%;
+    width: 18%;
     height: 100%;
   }
 
-  span {
+  p {
+    width:150px
+  }
+
+  .item_span {
     display: flex;
     align-content: center;
+
+    text-align: left;
 
     width: 100%
   }
@@ -90,4 +133,5 @@ export default {
 
     border:none;
   }
+
 </style>

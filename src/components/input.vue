@@ -25,7 +25,6 @@ export default {
         items:this.items,
         ddl:this.ddl,
         description:this.description,
-        isDone:false
       }
       this.$emit('submit_item',Anew_item)
       this.clear()
