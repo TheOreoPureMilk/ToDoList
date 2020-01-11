@@ -65,6 +65,11 @@
 export default {
   name:'table_item',
   props:['table_data'],
+  data(){
+    return {
+      numbers:0
+    }
+  },
   methods:{
     deleteRow(index){
       this.$emit("delete",index)

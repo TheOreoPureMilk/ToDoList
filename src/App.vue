@@ -38,7 +38,7 @@ export default {
   data(){
     return{ 
       data:[],
-      is_done:[],
+      is_done:[]
     }
   },
   methods:{
